@@ -56,26 +56,25 @@ Given the user's requirement provided as an argument, do this:
 
 1. Run the script `{SCRIPT}` from repo root and parse its JSON output for PROJECT_ROOT, DESIGN_DIR, DESIGN_FILE, and DESIGN_ID. All file paths must be absolute.
 
-2. **Comprehensive Analysis** (Do all of this in one go):
-   - Analyze the entire codebase structure
-   - Read key files like README.md, package.json/pyproject.toml, etc.
-   - Identify the technology stack, architecture patterns, and conventions
-   - Understand existing features and implementations
-   - Parse the user's requirement to identify:
-     * Type of request (new feature, refactoring, bug fix, enhancement)
-     * Scope and complexity
-     * Potential impact areas
-     * Success criteria
+2. **Requirement & Codebase Context Analysis** (Do all of this in one go):
+   - **Deconstruct the Requirement**: 
+     * Identify the core goal of the user's request.
+     * Determine the request type (new feature, refactoring, bug fix).
+     * Define the scope, complexity, and success criteria.
+   - **Gather Full Context from Codebase**: 
+     * Perform an exhaustive search for all code related to the requirement.
+     * Analyze existing implementations, data structures, and patterns that are relevant.
+     * Map out dependencies and potential impact areas.
+   - **Synthesize and Connect**: 
+     * Create a brief analysis connecting the existing code to the new requirement.
+     * Factually assess how the current implementation can support the new feature (synergies).
+     * Factually identify any architectural or code-level obstacles (impediments).
 
-3. **Deep Code Investigation & Design Formulation**:
-   - Investigate all potentially related code:
-     * Read ALL relevant files
-     * Trace execution flows
-     * Understand existing patterns
-     * Map dependencies and integration points
-   - Formulate a clear design approach based on analysis
-   - Make reasonable assumptions based on codebase patterns
-   - Prepare a concise "Proposed Design" summary (goals, scope, approach, key changes, trade-offs, alternatives, risks) and collect all open questions/choices to align in the next step.
+3. **Design Formulation**:
+   - Based on the context analysis, formulate a clear design approach.
+   - Make reasonable assumptions based on codebase patterns.
+   - Prepare a concise "Proposed Design" summary (goals, scope, approach, key changes, trade-offs, alternatives, risks). This summary MUST incorporate the findings from the context analysis, especially how the design leverages existing strengths and mitigates obstacles.
+   - Collect all open questions/choices to align in the next step.
 
 4. **Single Alignment Check (MANDATORY)**:
    - Present the "Proposed Design" summary and all critical decisions/choices to the user in one message
