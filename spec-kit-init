@@ -3,6 +3,15 @@
 
 set -e
 
+# Find the real directory of the script, resolving symlinks
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, resolve it relative to the symlink's path
+done
+SPEC_KIT_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
 # 检查是否在 git 仓库中
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
     echo "错误：请在一个 git 仓库中运行此脚本"
@@ -10,7 +19,6 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
-SPEC_KIT_ROOT="$(dirname "$0")"
 
 echo "设置新的 design 和 execute 命令..."
 
