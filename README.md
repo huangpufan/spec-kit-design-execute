@@ -1,5 +1,7 @@
 # Spec-Kit Design & Execute
 
+[English](./README.en.md)
+
 **轻量级的 AI 辅助开发工作流，专为 Cursor 优化。**
 
 ## 🎯 为什么需要这个项目？
