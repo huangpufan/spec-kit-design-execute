@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Spec-Lite Update Script
+#
+# This script updates the sk-init command and reinitializes the current project if needed.
+#
+# Usage:
+#   sk-update
+#
+
+set -e
+
+echo "开始更新 Spec-Lite..."
+
+# 检查当前目录是否已经执行过 sk-init
+is_spec_lite_initialized() {
+    # 检查是否在 git 仓库中
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        return 1
+    fi
+    
+    local project_root=$(git rev-parse --show-toplevel)
+    
+    # 检查必要的目录和文件是否存在
+    if [[ -d "$project_root/.cursor/commands" ]] && 
+       [[ -f "$project_root/.cursor/commands/design.md" ]] && 
+       [[ -f "$project_root/.cursor/commands/execute.md" ]] && 
+       [[ -f "$project_root/.cursor/commands/read.md" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# 记录当前是否已经初始化
+SHOULD_REINIT=false
+if is_spec_lite_initialized; then
+    SHOULD_REINIT=true
+    echo "检测到当前项目已执行过 sk-init，更新后将重新初始化"
+else
+    echo "当前项目未执行过 sk-init，更新后不会进行初始化"
+fi
+
+# 执行卸载和重新安装
+echo "执行卸载..."
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash
+
+echo "重新安装..."
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
+
+# 如果之前已经初始化，则重新初始化
+if [[ "$SHOULD_REINIT" == "true" ]]; then
+    echo "重新初始化当前项目..."
+    if command -v sk-init >/dev/null 2>&1; then
+        sk-init
+    else
+        echo "错误：sk-init 命令不可用，请检查安装是否成功" >&2
+        exit 1
+    fi
+else
+    echo "跳过项目初始化（当前目录未执行过 sk-init）"
+fi
+
+echo ""
+echo "✅ Spec-Lite 更新完成！"
+echo ""
+
+if [[ "$SHOULD_REINIT" == "true" ]]; then
+    echo "项目已重新初始化，现在你可以继续使用："
+    echo "  /design <需求描述> - 创建交互式设计文档"
+    echo "  /execute - 执行已批准的设计"
+    echo "  /read <查询> - 深度分析和理解现有代码库"
+    echo ""
+else
+    echo "如需在项目中使用 Spec-Lite 命令，请运行："
+    echo "  sk-init"
+    echo ""
+fi

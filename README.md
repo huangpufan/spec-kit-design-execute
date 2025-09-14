@@ -103,7 +103,14 @@ AI 将：
 
 ## 管理
 
-- **更新**: 重新运行安装命令即可。
+- **更新**: 
+  ```bash
+  sk-update
+  ```
+  或者重新运行安装命令：
+  ```bash
+  curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
+  ```
 - **卸载**:
   ```bash
   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash

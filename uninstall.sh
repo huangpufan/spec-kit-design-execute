@@ -9,8 +9,8 @@ set -e
 
 # --- Configuration ---
 INSTALL_DIR="$HOME/.spec-lite"
-CMD_NAME="sk-init"
-SYMLINK_PATH="/usr/local/bin/$CMD_NAME"
+CMD_NAMES=("sk-init" "sk-update")
+SYMLINK_PATHS=("/usr/local/bin/sk-init" "/usr/local/bin/sk-update")
 
 # --- Helper Functions ---
 command_exists() {
@@ -20,25 +20,30 @@ command_exists() {
 # --- Main Uninstallation Logic ---
 echo "Uninstalling Spec-Lite..."
 
-# 1. Remove symlink
-if [ -L "$SYMLINK_PATH" ]; then
-    echo "Removing symlink at $SYMLINK_PATH..."
-    if [ -w "$(dirname "$SYMLINK_PATH")" ]; then
-        rm -f "$SYMLINK_PATH"
-    else
-        if command_exists sudo; then
-            echo "Sudo privileges are required to remove the symlink."
-            sudo rm -f "$SYMLINK_PATH"
+# 1. Remove symlinks
+for i in "${!SYMLINK_PATHS[@]}"; do
+    SYMLINK_PATH="${SYMLINK_PATHS[$i]}"
+    CMD_NAME="${CMD_NAMES[$i]}"
+    
+    if [ -L "$SYMLINK_PATH" ]; then
+        echo "Removing symlink for $CMD_NAME at $SYMLINK_PATH..."
+        if [ -w "$(dirname "$SYMLINK_PATH")" ]; then
+            rm -f "$SYMLINK_PATH"
         else
-            echo "Error: Cannot remove symlink. No write access to $(dirname "$SYMLINK_PATH") and sudo is not available." >&2
-            echo "Please remove the symlink manually:" >&2
-            echo "  rm -f \"$SYMLINK_PATH\"" >&2
-            # We can still try to remove the directory
+            if command_exists sudo; then
+                echo "Sudo privileges are required to remove the symlink."
+                sudo rm -f "$SYMLINK_PATH"
+            else
+                echo "Error: Cannot remove symlink for $CMD_NAME. No write access to $(dirname "$SYMLINK_PATH") and sudo is not available." >&2
+                echo "Please remove the symlink manually:" >&2
+                echo "  rm -f \"$SYMLINK_PATH\"" >&2
+                # We can still try to remove the directory
+            fi
         fi
+    elif [ -f "$SYMLINK_PATH" ]; then
+        echo "Warning: Found a file instead of a symlink at $SYMLINK_PATH. It will not be removed." >&2
     fi
-elif [ -f "$SYMLINK_PATH" ]; then
-    echo "Warning: Found a file instead of a symlink at $SYMLINK_PATH. It will not be removed." >&2
-fi
+done
 
 # 2. Remove the repository directory
 if [ -d "$INSTALL_DIR" ]; then
