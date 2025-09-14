@@ -61,7 +61,7 @@ This tool helps you:
 | Feature                | Spec-Kit                                | Spec-Lite          |
 | ---------------------- | --------------------------------------- | ---------------------------------- |
 | **Workflow Steps**     | 4 steps (specify→plan→tasks→implement)  | 2 steps (design→execute)           |
-| **Initialization Time**| Requires configuring multiple tools     | One command, 30 seconds to complete|
+| **Initialization Time**| Script-based, more flexible     | One-command, more convenient|
 | **Learning Curve**     | Steep, requires understanding full SDD  | Gentle, intuitive design-to-code   |
 | **Scope**              | Mainly for new projects/features        | Any AI-assisted development task   |
 | **AI Tool Support**    | Claude, Gemini, Copilot, Cursor         | Focused on Cursor                  |
