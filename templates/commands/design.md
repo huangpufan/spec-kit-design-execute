@@ -54,9 +54,15 @@ For Chinese (LANGUAGE=zh):
 
 Given the user's requirement provided as an argument, do this:
 
-1. Run the script `{SCRIPT}` from repo root and parse its JSON output for PROJECT_ROOT, DESIGN_DIR, DESIGN_FILE, and DESIGN_ID. All file paths must be absolute.
+1. **Prepare Requirement Slug**:
+   - Analyze the user's requirement `{ARGS}`.
+   - Generate a short, descriptive, kebab-case English slug. This slug will be used for the design document's directory name.
+   - **Example**: If the requirement is "修复登录页面的一个bug", the slug should be something like "fix-login-page-bug".
+   - Let's call the result `SLUG_ARGS`.
 
-2. **Requirement & Codebase Context Analysis** (Do all of this in one go):
+2. Run the script `{SCRIPT}` with `SLUG_ARGS` as the argument from the repo root and parse its JSON output for PROJECT_ROOT, DESIGN_DIR, DESIGN_FILE, and DESIGN_ID. All file paths must be absolute.
+
+3. **Requirement & Codebase Context Analysis** (Do all of this in one go):
    - **Deconstruct the Requirement**: 
      * Identify the core goal of the user's request.
      * Determine the request type (new feature, refactoring, bug fix).
@@ -70,7 +76,7 @@ Given the user's requirement provided as an argument, do this:
      * Factually assess how the current implementation can support the new feature (synergies).
      * Factually identify any architectural or code-level obstacles (impediments).
 
-3. **Design Formulation**:
+4. **Design Formulation**:
    - Based on the context analysis, formulate a clear design approach.
    - **Conduct Impact Analysis**:
      * Identify all files and modules that will be added, modified, or deleted.
@@ -85,7 +91,7 @@ Given the user's requirement provided as an argument, do this:
      * **Alternatives**: Other options considered and why they were discarded.
    - Collect all open questions/choices to align in the next step.
 
-4. **Single Alignment Check (MANDATORY)**:
+5. **Single Alignment Check (MANDATORY)**:
    - Present the "Proposed Design" summary and all critical decisions/choices to the user in one message
    - Ask for explicit confirmation or selections (e.g., choose between options, approve/reject)
    - On approval, proceed to create the design document
@@ -93,7 +99,7 @@ Given the user's requirement provided as an argument, do this:
    
    **⏸️ STOP HERE - Wait for the user's decision before creating the design document.**
 
-5. **Design Documentation**:
+6. **Design Documentation**:
    
    **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
@@ -116,7 +122,7 @@ Given the user's requirement provided as an argument, do this:
      * **Risk Analysis**: Potential issues and mitigation
      * **Alternatives Considered**: Other approaches and why they were rejected (especially if simpler)
 
-6. **Design Delivery**:
+7. **Design Delivery**:
    - Create the design document and inform user of its location
    - State: "Design document created at [location]. You can review it and request adjustments if needed, or use `/execute` when ready to implement."
    - Make any requested adjustments promptly
