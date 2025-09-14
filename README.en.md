@@ -80,7 +80,14 @@ After that, you can start using the `/design` and `/execute` commands in Cursor.
 
 ## Management
 
-- **Update**: Simply re-run the installation script.
+- **Update**: 
+  ```bash
+  sk-update
+  ```
+  Or re-run the installation script:
+  ```bash
+  curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
+  ```
 - **Uninstall**:
   ```bash
   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash

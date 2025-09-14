@@ -20,8 +20,8 @@ BRANCH="${1:-main}" # Default to 'main' if no branch is provided
 
 GITHUB_REPO="huangpufan/spec-lite"
 INSTALL_DIR="$HOME/.spec-lite"
-CMD_NAME="sk-init"
-SYMLINK_PATH="/usr/local/bin/$CMD_NAME"
+CMD_NAMES=("sk-init" "sk-update")
+SYMLINK_PATHS=("/usr/local/bin/sk-init" "/usr/local/bin/sk-update")
 
 # --- Helper Functions ---
 command_exists() {
@@ -50,37 +50,54 @@ else
     git clone --branch "$BRANCH" "https://github.com/$GITHUB_REPO.git" "$INSTALL_DIR"
 fi
 
-# 3. Create symlink to the command
-# The main script to be linked is inside the cloned repo
-INIT_SCRIPT_PATH="$INSTALL_DIR/spec-kit-init"
+# 3. Create symlinks to the commands
+SCRIPT_PATHS=("$INSTALL_DIR/spec-kit-init" "$INSTALL_DIR/spec-kit-update")
 
-if [ ! -f "$INIT_SCRIPT_PATH" ]; then
-    echo "Error: Installation failed. Could not find '$INIT_SCRIPT_PATH'." >&2
-    exit 1
-fi
-
-echo "Creating symlink at $SYMLINK_PATH..."
-# Use sudo if the user doesn't have write permissions to /usr/local/bin
-if [ -w "/usr/local/bin" ]; then
-    ln -sf "$INIT_SCRIPT_PATH" "$SYMLINK_PATH"
-else
-    if command_exists sudo; then
-        echo "Sudo privileges are required to create the symlink in /usr/local/bin."
-        sudo ln -sf "$INIT_SCRIPT_PATH" "$SYMLINK_PATH"
-    else
-        echo "Error: Cannot create symlink. No write access to /usr/local/bin and sudo is not available." >&2
-        echo "Please create the symlink manually:" >&2
-        echo "  ln -s \"$INIT_SCRIPT_PATH\" \"/path/on/your/PATH/$CMD_NAME\"" >&2
+# Check if all required scripts exist
+for i in "${!SCRIPT_PATHS[@]}"; do
+    SCRIPT_PATH="${SCRIPT_PATHS[$i]}"
+    CMD_NAME="${CMD_NAMES[$i]}"
+    if [ ! -f "$SCRIPT_PATH" ]; then
+        echo "Error: Installation failed. Could not find '$SCRIPT_PATH'." >&2
         exit 1
     fi
-fi
+done
+
+echo "Creating symlinks..."
+# Use sudo if the user doesn't have write permissions to /usr/local/bin
+for i in "${!SCRIPT_PATHS[@]}"; do
+    SCRIPT_PATH="${SCRIPT_PATHS[$i]}"
+    SYMLINK_PATH="${SYMLINK_PATHS[$i]}"
+    CMD_NAME="${CMD_NAMES[$i]}"
+    
+    echo "Creating symlink for $CMD_NAME at $SYMLINK_PATH..."
+    if [ -w "/usr/local/bin" ]; then
+        ln -sf "$SCRIPT_PATH" "$SYMLINK_PATH"
+    else
+        if command_exists sudo; then
+            echo "Sudo privileges are required to create the symlink in /usr/local/bin."
+            sudo ln -sf "$SCRIPT_PATH" "$SYMLINK_PATH"
+        else
+            echo "Error: Cannot create symlink for $CMD_NAME. No write access to /usr/local/bin and sudo is not available." >&2
+            echo "Please create the symlink manually:" >&2
+            echo "  ln -s \"$SCRIPT_PATH\" \"/path/on/your/PATH/$CMD_NAME\"" >&2
+            exit 1
+        fi
+    fi
+done
 
 # 4. Final instructions
 echo ""
 echo "✅ Spec-Lite installed successfully!"
 echo ""
-echo "You can now run 'sk-init' in any git repository to set up the commands."
-echo "Example:"
+echo "Available commands:"
+echo "  sk-init   - Set up Spec-Lite commands in your git repository"
+echo "  sk-update - Update Spec-Lite and reinitialize current project if needed"
+echo ""
+echo "Example usage:"
 echo "  cd /path/to/your/project"
 echo "  sk-init"
+echo ""
+echo "To update Spec-Lite:"
+echo "  sk-update"
 echo ""

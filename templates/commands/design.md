@@ -5,7 +5,33 @@ scripts:
   ps: .specify/scripts/powershell/design-alignment.ps1 -Json "{ARGS}"
 ---
 
+# 🚫 ABSOLUTE PROHIBITION: NO IMPLEMENTATION IN THIS COMMAND
+
+**THIS IS A DESIGN-ONLY COMMAND. YOU ARE ABSOLUTELY FORBIDDEN FROM:**
+- Writing any implementation code
+- Creating any files except the design document
+- Modifying any existing code files
+- Suggesting code snippets or implementations
+- Using any code editing tools (search_replace, write, MultiEdit, etc.)
+
+**YOUR ONLY JOB IS TO:**
+1. Understand the requirement through dialogue
+2. Ask questions and align with the user
+3. Create a design document
+
+**IF THE USER ASKS YOU TO IMPLEMENT SOMETHING, YOUR RESPONSE MUST BE:**
+"This is the design phase. I cannot implement code here. Let's first complete the design alignment, and then you can use the `/execute` command for implementation."
+
+---
+
 **CRITICAL INSTRUCTION**: This is an INTERACTIVE process. You MUST engage in REAL dialogue with the user. NEVER proceed to the next step without explicit user confirmation. If you find yourself writing "The user confirms..." or similar phrases, STOP - you are hallucinating. Wait for ACTUAL user responses.
+
+**OPENING STATEMENT (ALWAYS SAY THIS FIRST):**
+"I understand you want to design [brief description of requirement]. This is the design phase where we'll discuss and align on the approach before any implementation. I will NOT write any code in this phase - only help you create a comprehensive design document.
+
+Let me start by understanding your project and requirement better."
+
+---
 
 Given the user's requirement provided as an argument, do this:
 
@@ -46,12 +72,14 @@ Given the user's requirement provided as an argument, do this:
    
    **🛑 CRITICAL: This is the MOST IMPORTANT step. You MUST have a REAL conversation with the user here.**
    
+   **⚠️ REMINDER: DO NOT IMPLEMENT ANYTHING! This is DESIGN ONLY!**
+   
    a) **First, present your understanding:**
       * The current project state and architecture
       * The user's requirement and its implications
       * Your findings from the deep code analysis
       * How the requirement relates to existing code
-      * Initial thoughts on approach and design
+      * Initial thoughts on approach and design (WITHOUT code snippets)
    
    **⏸️ STOP AND WAIT for user response.**
    
@@ -75,6 +103,8 @@ Given the user's requirement provided as an argument, do this:
 6. **Design Documentation**:
    
    **⏸️ CHECKPOINT: Before proceeding, the user MUST have explicitly said something like "Yes, let's proceed with the design document" or "I'm satisfied with our alignment". If they haven't, GO BACK to step 5.**
+   
+   **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
    - Once aligned, write a comprehensive design to DESIGN_FILE following the KISS principle:
      * **Summary**: Clear, simple description of what will be done
@@ -107,7 +137,7 @@ Given the user's requirement provided as an argument, do this:
    - Only after explicit user approval, report completion with design file location
    - Inform user they can now use `/execute` command when ready
 
-## 🚨 ANTI-HALLUCINATION RULES:
+## 🚨 ANTI-HALLUCINATION AND NO-IMPLEMENTATION RULES:
 
 1. **NEVER write user responses** - If you catch yourself writing "The user says...", "The user confirms...", or "After the user agrees...", STOP immediately.
 
@@ -118,6 +148,13 @@ Given the user's requirement provided as an argument, do this:
 4. **Explicit confirmations only** - The user must ACTUALLY type their confirmation. Assumed or implied confirmations don't count.
 
 5. **Questions need answers** - Every question you ask must receive an actual answer from the user before you continue.
+
+6. **ABSOLUTELY NO IMPLEMENTATION** - If you catch yourself:
+   - Writing code snippets
+   - Using code editing tools
+   - Creating implementation files
+   - Suggesting specific code changes
+   STOP immediately and remind yourself: "This is design phase only!"
 
 ## Example of CORRECT behavior:
 ```
