@@ -63,6 +63,9 @@ Given the user's requirement provided as an argument, do this:
 2. Run the script `{SCRIPT}` with `SLUG_ARGS` as the argument from the repo root and parse its JSON output for PROJECT_ROOT, DESIGN_DIR, DESIGN_FILE, and DESIGN_ID. All file paths must be absolute.
 
 3. **Requirement & Codebase Context Analysis** (Do all of this in one go):
+   - **Consult Project Onboarding**:
+     * Read and fully understand the project's core concepts, architecture, and conventions from `@.specify/onboarding.md`.
+     * Ensure your design aligns with the principles and guidelines described in the onboarding document.
    - **Deconstruct the Requirement**: 
      * Identify the core goal of the user's request.
      * Determine the request type (new feature, refactoring, bug fix).

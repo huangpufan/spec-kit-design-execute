@@ -38,18 +38,23 @@ The user will provide a natural language query that may include:
 
 **MANDATORY**: You MUST perform an exhaustive search to ensure completeness:
 
-1. **Initial Broad Search**:
+1. **Consult Project Onboarding First**:
+   - Before any code search, read and fully understand `@.specify/onboarding.md`.
+   - Use it as the primary source of truth for architecture, conventions, and core concepts.
+   - Frame your entire analysis within the context provided by this document.
+
+2. **Initial Broad Search**:
    - Use semantic search (`codebase_search`) with broad queries to identify ALL potentially relevant files
    - Search for related concepts, not just exact matches
    - Look for imports, exports, function calls, and references across the entire codebase
    
-2. **Deep File Analysis**:
+3. **Deep File Analysis**:
    - Read all identified files thoroughly
    - Trace function calls and data flows
    - Map dependencies and relationships
    - Analyze patterns and architectural decisions
 
-3. **Cross-Reference Verification**:
+4. **Cross-Reference Verification**:
    - Search for usages of identified components
    - Find all files that import or reference the core logic
    - Identify configuration files, tests, and documentation

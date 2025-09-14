@@ -35,6 +35,7 @@ scripts:
 4.  **Pre-execution Validation**:
     - Verify `DESIGN_FILE` exists.
     - Read the design document completely.
+    - Review the project's core principles in `@.specify/onboarding.md` to ensure your implementation is consistent with the existing architecture and conventions.
 
 5.  **Implementation Execution**:
     - Follow the implementation plan from the design document step by step.
@@ -49,12 +50,25 @@ scripts:
         - Validate the changes work as expected.
     - Maintain code quality (conventions, readability, error handling) while keeping solutions simple.
 
-6.  **Testing and Validation**:
+6.  **Onboarding Documentation Update (CRITICAL & RESTRAINED)**:
+    - After a successful implementation, you MUST update the project's onboarding document.
+    - Read `@.specify/onboarding.md` again.
+    - **Apply Restraint**: Your goal is to keep the document as a high-level, stable guide, NOT a detailed changelog.
+    - **Surgical Updates Only**:
+        - Identify the FEWEST sections possible that are directly impacted by the change (e.g., "Architecture Analysis", "Important Scripts/Tasks").
+        - If a change is minor (e.g., a small bug fix with no architectural impact), DO NOT update the document.
+        - Only update for significant changes like adding a new core script, modifying a major workflow, or altering the project structure.
+    - **Focus on "What" and "Why", Not "How"**:
+        - Update the document to reflect the new state of the codebase at a conceptual level.
+        - Example: If you added `new-script.sh`, describe its purpose and role (the "what" and "why"), but DO NOT include implementation details or code snippets.
+    - **Maintain Conciseness**: Keep the language simple, clear, and brief. Remove outdated information if necessary.
+
+7.  **Testing and Validation**:
     - Implement tests according to the testing strategy in the design.
     - Run all relevant tests (new and existing) to ensure correctness and prevent regressions.
     - After each significant change, run linters, formatters, and perform checks to ensure the codebase remains healthy.
 
-7.  **Final Report**:
+8.  **Final Report**:
     - Upon completion, provide a summary of what was implemented.
     - Note any deviations from the original design (with justification).
     - Report test results.
