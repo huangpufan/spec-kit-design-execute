@@ -9,7 +9,19 @@
 
 set -e
 
-echo "开始更新 Spec-Lite..."
+# --- Source Common Functions ---
+# Find the real directory of the script to source the common functions
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SPEC_KIT_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+source "$SPEC_KIT_ROOT/common-install.sh"
+
+print_header "${EMOJI_LOOP} Updating Spec-Lite"
+
 
 # 检查当前目录是否已经执行过 sk-init
 is_spec_lite_initialized() {
@@ -31,47 +43,57 @@ is_spec_lite_initialized() {
     fi
 }
 
-# 记录当前是否已经初始化
+# --- Main Update Logic ---
+print_step "Checking current project status"
 SHOULD_REINIT=false
 if is_spec_lite_initialized; then
     SHOULD_REINIT=true
-    echo "检测到当前项目已执行过 sk-init，更新后将重新初始化"
+    log_info "Current project is initialized. It will be re-initialized after the update."
 else
-    echo "当前项目未执行过 sk-init，更新后不会进行初始化"
+    log_info "Current project is not initialized. Skipping re-initialization."
 fi
 
-# 执行卸载和重新安装
-echo "执行卸载..."
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash
 
-echo "重新安装..."
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
+# 执行卸载和重新安装
+print_step "Updating core components"
+log_info "Uninstalling the old version..."
+if curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash; then
+    log_success "Old version uninstalled."
+else
+    log_error "Uninstallation failed."
+    exit 1
+fi
+
+log_info "Installing the new version..."
+if curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash; then
+    log_success "New version installed."
+else
+    log_error "Installation failed."
+    exit 1
+fi
 
 # 如果之前已经初始化，则重新初始化
 if [[ "$SHOULD_REINIT" == "true" ]]; then
-    echo "重新初始化当前项目..."
+    print_step "Re-initializing project"
     if command -v sk-init >/dev/null 2>&1; then
         sk-init
     else
-        echo "错误：sk-init 命令不可用，请检查安装是否成功" >&2
+        log_error "sk-init command is not available. Please check the installation."
         exit 1
     fi
-else
-    echo "跳过项目初始化（当前目录未执行过 sk-init）"
 fi
 
-echo ""
-echo "✅ Spec-Lite 更新完成！"
+print_header "${EMOJI_SPARKLE} Update Complete"
+log_success "Spec-Lite has been updated successfully!"
 echo ""
 
 if [[ "$SHOULD_REINIT" == "true" ]]; then
-    echo "项目已重新初始化，现在你可以继续使用："
-    echo "  /design <需求描述> - 创建交互式设计文档"
-    echo "  /execute - 执行已批准的设计"
-    echo "  /read <查询> - 深度分析和理解现有代码库"
-    echo ""
+    log_info "The project has been re-initialized. You can continue using the commands:"
+    print_command "/design <description> - Create an interactive design document"
+    print_command "/execute              - Execute the approved design"
+    print_command "/read <query>         - Deeply analyze and understand the existing codebase"
 else
-    echo "如需在项目中使用 Spec-Lite 命令，请运行："
-    echo "  sk-init"
-    echo ""
+    log_info "To use Spec-Lite commands in a project, navigate to its directory and run:"
+    print_command "sk-init"
 fi
+echo ""

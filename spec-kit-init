@@ -12,103 +12,119 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 SPEC_KIT_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
+# Source common functions for output
+source "$SPEC_KIT_ROOT/common-install.sh"
+
+print_header "${EMOJI_BOX} Spec-Lite Project Initialization"
+
 # 检查是否在 git 仓库中
+print_step "Verifying repository"
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
-    echo "错误：请在一个 git 仓库中运行此脚本"
+    log_error "Please run this script inside a git repository."
     exit 1
 fi
-
+log_success "Currently in a git repository."
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
+
 # 检查是否已有语言配置
+print_step "Configuring language setting"
 LANG_CONFIG="$PROJECT_ROOT/.specify/config/language.conf"
 if [ -f "$LANG_CONFIG" ]; then
     # 如果已有配置，读取并显示
     source "$LANG_CONFIG"
-    echo "检测到已有语言配置: $([ "$LANGUAGE" = "zh" ] && echo "中文" || echo "English")"
-    echo "是否要更改语言设置? / Do you want to change the language setting? (y/N)"
+    log_info "Detected existing language setting: $([ "$LANGUAGE" = "zh" ] && echo "中文 (Chinese)" || echo "English")"
+    echo -n "Do you want to change the language setting? (y/N) "
     read -r CHANGE_LANG
     if [[ ! "$CHANGE_LANG" =~ ^[Yy]$ ]]; then
-        echo "保持当前语言设置 / Keeping current language setting"
+        log_info "Keeping current language setting."
     else
         # 重新选择语言
         echo ""
-        echo "请选择文档语言 / Please select document language:"
-        PS3="请输入选项编号 / Please enter your choice: "
+        log_info "Please select document language:"
+        PS3="Please enter your choice: "
         options=("中文 (Chinese)" "English")
         select opt in "${options[@]}"
         do
             case $opt in
                 "中文 (Chinese)")
                     LANGUAGE="zh"
-                    echo "您选择了中文文档"
+                    log_success "Language set to Chinese."
                     break
                     ;;
                 "English")
                     LANGUAGE="en"
-                    echo "You selected English documentation"
+                    log_success "Language set to English."
                     break
                     ;;
-                *) echo "无效选项，请重新选择 / Invalid option, please try again";;
+                *) log_warning "Invalid option, please try again.";;
             esac
         done
     fi
 else
     # 没有配置文件，进行首次选择
-    echo "请选择文档语言 / Please select document language:"
-    PS3="请输入选项编号 / Please enter your choice: "
+    log_info "Please select document language:"
+    PS3="Please enter your choice: "
     options=("中文 (Chinese)" "English")
     select opt in "${options[@]}"
     do
         case $opt in
             "中文 (Chinese)")
                 LANGUAGE="zh"
-                echo "您选择了中文文档"
+                log_success "Language set to Chinese."
                 break
                 ;;
             "English")
                 LANGUAGE="en"
-                echo "You selected English documentation"
+                log_success "Language set to English."
                 break
                 ;;
-            *) echo "无效选项，请重新选择 / Invalid option, please try again";;
+            *) log_warning "Invalid option, please try again.";;
         esac
     done
 fi
 
-echo ""
-echo "设置新的 design 和 execute 命令..."
+print_step "Setting up Spec-Lite commands"
 
 # 创建必要的目录
+print_minor_step "Creating required directories"
 mkdir -p "$PROJECT_ROOT/.cursor/commands"
 mkdir -p "$PROJECT_ROOT/.specify/scripts/bash"
 mkdir -p "$PROJECT_ROOT/.specify/scripts/powershell"
 mkdir -p "$PROJECT_ROOT/.specify/config"
+log_success "Directories created."
 
 # 保存语言配置
+print_minor_step "Saving language configuration"
 echo "LANGUAGE=$LANGUAGE" > "$PROJECT_ROOT/.specify/config/language.conf"
+log_success "Configuration saved."
 
 # 复制命令文件
-echo "复制命令文件..."
+print_minor_step "Copying command templates"
 cp "$SPEC_KIT_ROOT/templates/commands/design.md" "$PROJECT_ROOT/.cursor/commands/"
 cp "$SPEC_KIT_ROOT/templates/commands/execute.md" "$PROJECT_ROOT/.cursor/commands/"
 cp "$SPEC_KIT_ROOT/templates/commands/read.md" "$PROJECT_ROOT/.cursor/commands/"
+log_success "Command templates copied."
 
 # 复制脚本文件
-echo "复制脚本文件..."
+print_minor_step "Copying support scripts"
 cp "$SPEC_KIT_ROOT/scripts/bash/design-alignment.sh" "$PROJECT_ROOT/.specify/scripts/bash/"
 cp "$SPEC_KIT_ROOT/scripts/bash/execute-design.sh" "$PROJECT_ROOT/.specify/scripts/bash/"
 cp "$SPEC_KIT_ROOT/scripts/powershell/design-alignment.ps1" "$PROJECT_ROOT/.specify/scripts/powershell/"
 cp "$SPEC_KIT_ROOT/scripts/powershell/execute-design.ps1" "$PROJECT_ROOT/.specify/scripts/powershell/"
+log_success "Support scripts copied."
 
 # 设置执行权限
+print_minor_step "Setting script permissions"
 chmod +x "$PROJECT_ROOT/.specify/scripts/bash/"*.sh
+log_success "Permissions set."
 
-echo "✅ 新命令已成功设置！"
+print_header "${EMOJI_SPARKLE} Setup Complete"
+log_success "New commands have been set up successfully!"
 echo ""
-echo "现在你可以在 Cursor 中使用："
-echo "  /design <需求描述> - 创建交互式设计文档"
-echo "  /execute - 执行已批准的设计"
-echo "  /read <查询> - 深度分析和理解现有代码库"
+log_info "You can now use the following commands in Cursor:"
+print_command "/design <description> - Create an interactive design document"
+print_command "/execute              - Execute the approved design"
+print_command "/read <query>         - Deeply analyze and understand the existing codebase"
 echo ""
-echo "提示：第一次使用时，Cursor 可能需要重新加载项目才能识别新命令。"
+log_warning "The first time you use them, Cursor may need to be reloaded to recognize the new commands."
