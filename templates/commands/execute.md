@@ -35,7 +35,6 @@ scripts:
 4.  **Pre-execution Validation**:
     - Verify `DESIGN_FILE` exists.
     - Read the design document completely.
-    - **Crucially, check for `**Status**: APPROVED`**. If it's not present, inform the user that the design is not approved and ask if they wish to proceed anyway. Only continue if they confirm.
 
 5.  **Implementation Execution**:
     - Follow the implementation plan from the design document step by step.
@@ -62,7 +61,6 @@ scripts:
     - List any remaining tasks or follow-ups.
 
 **IMPORTANT**: 
-- This command should ideally be run on a design that has been approved via the `/design` command.
 - Always follow the KISS principle during implementation - simplicity is key.
 - If issues arise during implementation that require design changes, pause and consult with the user rather than making unilateral decisions.
 - If you find yourself implementing something complex when a simpler solution exists, stop and reconsider your approach.

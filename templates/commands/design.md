@@ -15,8 +15,7 @@ scripts:
 When using Chinese (LANGUAGE=zh), you MUST:
 1. Communicate with the user entirely in Chinese
 2. When editing the design document, translate ALL content including:
-   - Section headers: "Design Document" → "设计文档", "Requirement" → "需求描述", "Summary" → "概要说明", "Context" → "背景分析", "Detailed Design" → "详细设计", "Implementation Plan" → "实施计划", "Testing Strategy" → "测试策略", "Risk Analysis" → "风险分析", "Alternatives Considered" → "备选方案", "Approval Status" → "审批状态"
-   - Status values: "DRAFT" → "草稿", "PENDING" → "待审批", "APPROVED" → "已批准"
+   - Section headers: "Design Document" → "设计文档", "Requirement" → "需求描述", "Summary" → "概要说明", "Context" → "背景分析", "Detailed Design" → "详细设计", "Implementation Plan" → "实施计划", "Testing Strategy" → "测试策略", "Risk Analysis" → "风险分析", "Alternatives Considered" → "备选方案"
    - All descriptions, comments, and content within sections
 3. Keep technical terms, code snippets, and file paths in their original form
 
@@ -90,15 +89,8 @@ Given the user's requirement provided as an argument, do this:
    
    **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
-   **📝 Design Status Management:**
-   - Create with **Status: DRAFT** (or **草稿** in Chinese)
-   - Status options:
-     - **PENDING** (待审批): Ready for review
-     - **APPROVED** (已批准): Ready for implementation
-   - Only **APPROVED** designs should be implemented via `/execute`
-   
    Write a comprehensive design to DESIGN_FILE following KISS principle:
-     * **Header with Status**: Include ID, Date, and **Status: DRAFT** (or 草稿)
+     * **Header**: Include ID and Date
      * **Summary**: Clear, simple description of what will be done
      * **Context**: Current state and why this change is needed
      * **Design Principles**: 
@@ -115,7 +107,6 @@ Given the user's requirement provided as an argument, do this:
      * **Testing Strategy**: Focus on essential tests, avoid over-testing
      * **Risk Analysis**: Potential issues and mitigation
      * **Alternatives Considered**: Other approaches and why they were rejected (especially if simpler)
-     * **Approval Status**: Include Status (DRAFT/PENDING/APPROVED), Approved By, and Approval Date fields
 
 6. **Design Delivery**:
    - Create the design document and inform user of its location
