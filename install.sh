@@ -7,12 +7,16 @@
 # Usage:
 #   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/main/install.sh | bash
 #
+# To install from a specific branch (e.g., dev):
+#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/main/install.sh | bash -s dev
+#
 # Or, to install a specific version:
 #   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/v1.0.0/install.sh | bash
 #
 
 set -e
 
+BRANCH="${1:-main}" # Default to 'main' if no branch is provided
 
 GITHUB_REPO="huangpufan/spec-lite"
 INSTALL_DIR="$HOME/.spec-lite"
@@ -35,13 +39,15 @@ fi
 
 # 2. Clone or update the repository
 if [ -d "$INSTALL_DIR" ]; then
-    echo "Updating existing installation in $INSTALL_DIR..."
+    echo "Updating existing installation in $INSTALL_DIR to branch '$BRANCH'..."
     cd "$INSTALL_DIR"
-    git pull
+    git fetch origin
+    git checkout "$BRANCH"
+    git pull origin "$BRANCH"
     cd - >/dev/null
 else
-    echo "Cloning repository into $INSTALL_DIR..."
-    git clone "https://github.com/$GITHUB_REPO.git" "$INSTALL_DIR"
+    echo "Cloning repository (branch: $BRANCH) into $INSTALL_DIR..."
+    git clone --branch "$BRANCH" "https://github.com/$GITHUB_REPO.git" "$INSTALL_DIR"
 fi
 
 # 3. Create symlink to the command
