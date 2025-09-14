@@ -36,7 +36,8 @@ is_spec_lite_initialized() {
     if [[ -d "$project_root/.cursor/commands" ]] && 
        [[ -f "$project_root/.cursor/commands/design.md" ]] && 
        [[ -f "$project_root/.cursor/commands/execute.md" ]] && 
-       [[ -f "$project_root/.cursor/commands/read.md" ]]; then
+       [[ -f "$project_root/.cursor/commands/read.md" ]] &&
+       [[ -f "$project_root/.cursor/commands/onboard.md" ]]; then
         return 0
     else
         return 1
