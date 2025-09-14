@@ -5,6 +5,21 @@ scripts:
   ps: .specify/scripts/powershell/design-alignment.ps1 -Json "{ARGS}"
 ---
 
+# 🌐 LANGUAGE CONFIGURATION
+
+**IMPORTANT**: Check the language configuration at `.specify/config/language.conf`:
+- If `LANGUAGE=zh`: Use Chinese (中文) for all dialogues and design documents
+- If `LANGUAGE=en`: Use English for all dialogues and design documents
+- If the config file doesn't exist: Default to English
+
+When using Chinese (LANGUAGE=zh), you MUST:
+1. Communicate with the user entirely in Chinese
+2. When editing the design document, translate ALL content including:
+   - Section headers: "Design Document" → "设计文档", "Requirement" → "需求描述", "Summary" → "概要说明", "Context" → "背景分析", "Detailed Design" → "详细设计", "Implementation Plan" → "实施计划", "Testing Strategy" → "测试策略", "Risk Analysis" → "风险分析", "Alternatives Considered" → "备选方案", "Approval Status" → "审批状态"
+   - Status values: "DRAFT" → "草稿", "PENDING" → "待审批", "APPROVED" → "已批准"
+   - All descriptions, comments, and content within sections
+3. Keep technical terms, code snippets, and file paths in their original form
+
 # 🚫 ABSOLUTE PROHIBITION: NO IMPLEMENTATION IN THIS COMMAND
 
 **THIS IS A DESIGN-ONLY COMMAND. YOU ARE ABSOLUTELY FORBIDDEN FROM:**
@@ -20,16 +35,25 @@ scripts:
 3. Create a design document
 
 **IF THE USER ASKS YOU TO IMPLEMENT SOMETHING, YOUR RESPONSE MUST BE:**
-"This is the design phase. I cannot implement code here. Let's first complete the design alignment, and then you can use the `/execute` command for implementation."
+For English: "This is the design phase. I cannot implement code here. Let's first complete the design alignment, and then you can use the `/execute` command for implementation."
+For Chinese: "这是设计阶段。我不能在这里实现代码。让我们先完成设计对齐，然后您可以使用 `/execute` 命令进行实施。"
 
 ---
 
 **CRITICAL INSTRUCTION**: This is an INTERACTIVE process. You MUST engage in REAL dialogue with the user. NEVER proceed to the next step without explicit user confirmation. If you find yourself writing "The user confirms..." or similar phrases, STOP - you are hallucinating. Wait for ACTUAL user responses.
 
 **OPENING STATEMENT (ALWAYS SAY THIS FIRST):**
+First check the language configuration, then use the appropriate opening:
+
+For English (LANGUAGE=en or no config):
 "I understand you want to design [brief description of requirement]. This is the design phase where we'll discuss and align on the approach before any implementation. I will NOT write any code in this phase - only help you create a comprehensive design document.
 
 Let me start by understanding your project and requirement better."
+
+For Chinese (LANGUAGE=zh):
+"我了解您想要设计 [需求的简要描述]。这是设计阶段，我们将在实施前讨论并对齐方案。在这个阶段我不会编写任何代码 - 只会帮助您创建一个全面的设计文档。
+
+让我先更好地了解您的项目和需求。"
 
 ---
 

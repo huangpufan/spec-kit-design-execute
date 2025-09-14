@@ -5,6 +5,13 @@ scripts:
   ps: .specify/scripts/powershell/execute-design.ps1 -Json {ARGS}
 ---
 
+# 🌐 LANGUAGE CONFIGURATION
+
+**IMPORTANT**: Check the language configuration at `.specify/config/language.conf`:
+- If `LANGUAGE=zh`: Use Chinese (中文) for all dialogues and messages
+- If `LANGUAGE=en`: Use English for all dialogues and messages
+- If the config file doesn't exist: Default to English
+
 **Objective**: Execute an implementation based on an approved design document, automatically selecting it if only one exists, or letting the user choose from multiple options.
 
 1.  **Initial Script Execution**:
@@ -16,8 +23,12 @@ scripts:
     - **If the script lists exactly one design**, inform the user and automatically proceed with that design without asking for selection.
     - **If the script lists multiple designs**, present the list to the user and ask them to choose which one to execute. You can show the full name or just the ID for simplicity.
     - When user selection is needed, wait for the user to provide the ID or full name of the design they want to execute.
+    - **If the script lists exactly one design**, inform the user and automatically proceed with that design without asking for selection.
+    - **If the script lists multiple designs**, present the list to the user and ask them to choose which one to execute. You can show the full name or just the ID for simplicity.
+    - When user selection is needed, wait for the user to provide the ID or full name of the design they want to execute.
 
 3.  **Final Script Execution**:
+    - Once a design is selected (either automatically or by the user), re-run the script `{SCRIPT}`, this time passing the selected design ID or name as an argument.
     - Once a design is selected (either automatically or by the user), re-run the script `{SCRIPT}`, this time passing the selected design ID or name as an argument.
     - Parse the JSON output from this second run for `DESIGN_FILE`, `DESIGN_ID`, and `PROJECT_ROOT`. All file paths must be absolute.
 

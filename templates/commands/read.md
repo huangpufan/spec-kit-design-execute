@@ -2,6 +2,15 @@
 description: Perform deep codebase analysis and understanding through AI-driven exploration. Ask complex questions about your repository and receive comprehensive answers with text, code snippets, and diagrams.
 ---
 
+# 🌐 LANGUAGE CONFIGURATION
+
+**IMPORTANT**: Check the language configuration at `.specify/config/language.conf`:
+- If `LANGUAGE=zh`: Use Chinese (中文) for all analysis results and explanations
+- If `LANGUAGE=en`: Use English for all analysis results and explanations
+- If the config file doesn't exist: Default to English
+
+When using Chinese, provide all explanations, summaries, and technical descriptions in Chinese while keeping code snippets and technical terms as-is.
+
 # Deep Codebase Analysis Command
 
 **Objective**: Provide thorough, AI-driven analysis of the codebase to answer user questions about existing code, architecture, logic flows, and dependencies.
