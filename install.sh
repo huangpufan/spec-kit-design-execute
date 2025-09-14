@@ -13,8 +13,7 @@
 
 set -e
 
-# --- Configuration ---
-# TODO: Replace with your actual GitHub username and repository name
+
 GITHUB_REPO="huangpufan/spec-kit-design-execute"
 INSTALL_DIR="$HOME/.spec-kit-design-execute"
 CMD_NAME="sk-init"
