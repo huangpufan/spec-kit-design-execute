@@ -27,11 +27,16 @@ scripts:
 
 5.  **Implementation Execution**:
     - Follow the implementation plan from the design document step by step.
+    - **Apply KISS Principle Throughout**:
+        - Choose the simplest implementation that meets requirements
+        - Avoid over-engineering or adding unnecessary complexity
+        - Prefer straightforward, readable code over clever solutions
+        - Don't add features or abstractions not specified in the design
     - For each major step:
         - Announce what you're about to do.
-        - Implement the changes.
+        - Implement the changes using the simplest approach possible.
         - Validate the changes work as expected.
-    - Maintain code quality (conventions, readability, error handling).
+    - Maintain code quality (conventions, readability, error handling) while keeping solutions simple.
 
 6.  **Testing and Validation**:
     - Implement tests according to the testing strategy in the design.
@@ -44,4 +49,8 @@ scripts:
     - Report test results.
     - List any remaining tasks or follow-ups.
 
-**IMPORTANT**: This command should ideally be run on a design that has been approved via the `/design` command. If issues arise during implementation that require design changes, pause and consult with the user rather than making unilateral decisions.
+**IMPORTANT**: 
+- This command should ideally be run on a design that has been approved via the `/design` command.
+- Always follow the KISS principle during implementation - simplicity is key.
+- If issues arise during implementation that require design changes, pause and consult with the user rather than making unilateral decisions.
+- If you find yourself implementing something complex when a simpler solution exists, stop and reconsider your approach.
