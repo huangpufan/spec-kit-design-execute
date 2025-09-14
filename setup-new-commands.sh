@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# 快速设置新命令到现有项目的脚本
+
+set -e
+
+# 检查是否在 git 仓库中
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "错误：请在一个 git 仓库中运行此脚本"
+    exit 1
+fi
+
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+SPEC_KIT_ROOT="$(dirname "$0")"
+
+echo "设置新的 design 和 execute 命令..."
+
+# 创建必要的目录
+mkdir -p "$PROJECT_ROOT/.cursor/commands"
+mkdir -p "$PROJECT_ROOT/.specify/scripts/bash"
+mkdir -p "$PROJECT_ROOT/.specify/scripts/powershell"
+
+# 复制命令文件
+echo "复制命令文件..."
+cp "$SPEC_KIT_ROOT/templates/commands/design.md" "$PROJECT_ROOT/.cursor/commands/"
+cp "$SPEC_KIT_ROOT/templates/commands/execute.md" "$PROJECT_ROOT/.cursor/commands/"
+
+# 复制脚本文件
+echo "复制脚本文件..."
+cp "$SPEC_KIT_ROOT/scripts/bash/design-alignment.sh" "$PROJECT_ROOT/.specify/scripts/bash/"
+cp "$SPEC_KIT_ROOT/scripts/bash/execute-design.sh" "$PROJECT_ROOT/.specify/scripts/bash/"
+cp "$SPEC_KIT_ROOT/scripts/powershell/design-alignment.ps1" "$PROJECT_ROOT/.specify/scripts/powershell/"
+cp "$SPEC_KIT_ROOT/scripts/powershell/execute-design.ps1" "$PROJECT_ROOT/.specify/scripts/powershell/"
+
+# 设置执行权限
+chmod +x "$PROJECT_ROOT/.specify/scripts/bash/"*.sh
+
+echo "✅ 新命令已成功设置！"
+echo ""
+echo "现在你可以在 Cursor 中使用："
+echo "  /design <需求描述> - 创建交互式设计文档"
+echo "  /execute - 执行已批准的设计"
+echo ""
+echo "提示：第一次使用时，Cursor 可能需要重新加载项目才能识别新命令。"
