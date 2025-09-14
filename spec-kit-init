@@ -20,26 +20,61 @@ fi
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
-# 选择语言
-echo "请选择文档语言 / Please select document language:"
-PS3="请输入选项编号 / Please enter your choice: "
-options=("中文 (Chinese)" "English")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "中文 (Chinese)")
-            LANGUAGE="zh"
-            echo "您选择了中文文档"
-            break
-            ;;
-        "English")
-            LANGUAGE="en"
-            echo "You selected English documentation"
-            break
-            ;;
-        *) echo "无效选项，请重新选择 / Invalid option, please try again";;
-    esac
-done
+# 检查是否已有语言配置
+LANG_CONFIG="$PROJECT_ROOT/.specify/config/language.conf"
+if [ -f "$LANG_CONFIG" ]; then
+    # 如果已有配置，读取并显示
+    source "$LANG_CONFIG"
+    echo "检测到已有语言配置: $([ "$LANGUAGE" = "zh" ] && echo "中文" || echo "English")"
+    echo "是否要更改语言设置? / Do you want to change the language setting? (y/N)"
+    read -r CHANGE_LANG
+    if [[ ! "$CHANGE_LANG" =~ ^[Yy]$ ]]; then
+        echo "保持当前语言设置 / Keeping current language setting"
+    else
+        # 重新选择语言
+        echo ""
+        echo "请选择文档语言 / Please select document language:"
+        PS3="请输入选项编号 / Please enter your choice: "
+        options=("中文 (Chinese)" "English")
+        select opt in "${options[@]}"
+        do
+            case $opt in
+                "中文 (Chinese)")
+                    LANGUAGE="zh"
+                    echo "您选择了中文文档"
+                    break
+                    ;;
+                "English")
+                    LANGUAGE="en"
+                    echo "You selected English documentation"
+                    break
+                    ;;
+                *) echo "无效选项，请重新选择 / Invalid option, please try again";;
+            esac
+        done
+    fi
+else
+    # 没有配置文件，进行首次选择
+    echo "请选择文档语言 / Please select document language:"
+    PS3="请输入选项编号 / Please enter your choice: "
+    options=("中文 (Chinese)" "English")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "中文 (Chinese)")
+                LANGUAGE="zh"
+                echo "您选择了中文文档"
+                break
+                ;;
+            "English")
+                LANGUAGE="en"
+                echo "You selected English documentation"
+                break
+                ;;
+            *) echo "无效选项，请重新选择 / Invalid option, please try again";;
+        esac
+    done
+fi
 
 echo ""
 echo "设置新的 design 和 execute 命令..."
