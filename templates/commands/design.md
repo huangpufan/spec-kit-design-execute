@@ -78,55 +78,22 @@ Given the user's requirement provided as an argument, do this:
    
    **⏸️ STOP HERE - Do NOT proceed to step 4 yet. Continue with step 4 only in your NEXT response.**
 
-4. **Deep Code Context Analysis** (MANDATORY):
-   - Based on the requirement, thoroughly investigate all potentially related code:
-     * Identify and read ALL files that might be affected or need modification
-     * Trace through the complete execution flow of related features
-     * Understand existing implementations of similar functionalities
-     * Map out all dependencies and integration points
-     * Examine data models, APIs, and interfaces that will be touched
-     * Review existing tests to understand expected behaviors
-   - Document your findings and share with the user to confirm understanding
-   - If any part of the codebase seems relevant but you're unsure, investigate it
-   - This step is CRITICAL - incomplete understanding leads to flawed designs
-   
-   **⏸️ MANDATORY STOP - Present your analysis to the user and WAIT for their response. Do NOT proceed to step 5 until the user explicitly confirms or provides feedback.**
+4. **Consolidated Analysis & Design Formulation**:
+   - Perform a deep code context analysis. Based on the requirement, thoroughly investigate all potentially related code:
+     * Identify and read ALL relevant files.
+     * Trace execution flows of related features.
+     * Understand existing implementations and patterns.
+     * Map out dependencies and integration points.
+   - Based on this analysis, formulate a clear design approach.
+   - **ASSUME ALIGNMENT**: Proceed with high confidence by making reasonable assumptions based on the existing codebase and the user's request. Explicitly document any significant assumptions in the final design document.
+   - **SINGLE ALIGNMENT CHECK (Optional)**:
+     * **DO NOT STOP** for step-by-step confirmation.
+     * **ONLY IF** you encounter critical ambiguities or contradictions that make it impossible to create a coherent design, you may stop and present a single, consolidated list of questions to the user.
+     * Otherwise, if you believe you have a clear path forward, proceed directly to creating the design document.
 
-5. **Interactive Alignment Process**:
+5. **Design Documentation**:
    
-   **🛑 CRITICAL: This is the MOST IMPORTANT step. You MUST have a REAL conversation with the user here.**
-   
-   **⚠️ REMINDER: DO NOT IMPLEMENT ANYTHING! This is DESIGN ONLY!**
-   
-   a) **First, present your understanding:**
-      * The current project state and architecture
-      * The user's requirement and its implications
-      * Your findings from the deep code analysis
-      * How the requirement relates to existing code
-      * Initial thoughts on approach and design (WITHOUT code snippets)
-   
-   **⏸️ STOP AND WAIT for user response.**
-   
-   b) **Then, ask clarifying questions** (in subsequent responses based on user feedback):
-      * Specific behaviors and edge cases
-      * Performance and scalability requirements
-      * Integration with existing features
-      * UI/UX preferences (if applicable)
-      * Testing requirements
-      * Any technical details you're not 100% certain about
-   
-   **⏸️ After EACH question, STOP AND WAIT for user response.**
-   
-   c) **Continue this back-and-forth dialogue until:**
-      * All your questions are answered
-      * The user explicitly confirms they're satisfied with the alignment
-      * You have 100% clarity on all aspects
-   
-   **🚫 NEVER write phrases like "The user confirms..." or "After discussion..." - these indicate you're hallucinating a conversation that hasn't happened.**
-
-6. **Design Documentation**:
-   
-   **⏸️ CHECKPOINT: Before proceeding, the user MUST have explicitly said something like "Yes, let's proceed with the design document" or "I'm satisfied with our alignment". If they haven't, GO BACK to step 5.**
+   **CHECKPOINT**: Before proceeding, you must be confident that you are aligned with the user's goals and have a clear design path.
    
    **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
@@ -158,7 +125,7 @@ Given the user's requirement provided as an argument, do this:
      * **Alternatives Considered**: Other approaches and why they were rejected (especially if simpler)
      * **Approval Status**: Include Status (DRAFT/PENDING/APPROVED), Approved By, and Approval Date fields
 
-7. **Final Confirmation**:
+6. **Final Confirmation**:
    - Present the complete design document location to the user
    - Ask: "I've created the design document at [location]. Would you like me to make any adjustments to it?"
    
@@ -167,7 +134,7 @@ Given the user's requirement provided as an argument, do this:
    - Make any adjustments based on user feedback
    - Only mark as complete when user explicitly approves
 
-8. **Completion**:
+7. **Completion**:
    - Only after explicit user approval, report completion with design file location
    - Inform user they can now use `/execute` command when ready
 
