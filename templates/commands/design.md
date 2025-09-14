@@ -130,7 +130,16 @@ Given the user's requirement provided as an argument, do this:
    
    **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
+   **📝 IMPORTANT - Design Status Management:**
+   - The design document will be created with **Status: DRAFT** (or **Status: 草稿** in Chinese)
+   - To make the design no longer a draft, you need to change this field to:
+     - **PENDING** (待审批): Ready for review/approval
+     - **APPROVED** (已批准): Officially approved for implementation
+   - The status field appears at the top of the document and in the "Approval Status" section at the bottom
+   - Only designs with **APPROVED** status should be implemented using `/execute`
+   
    - Once aligned, write a comprehensive design to DESIGN_FILE following the KISS principle:
+     * **Header with Status**: Include ID, Date, and **Status: DRAFT** (or 草稿)
      * **Summary**: Clear, simple description of what will be done
      * **Context**: Current state and why this change is needed
      * **Design Principles**: 
@@ -147,6 +156,7 @@ Given the user's requirement provided as an argument, do this:
      * **Testing Strategy**: Focus on essential tests, avoid over-testing
      * **Risk Analysis**: Potential issues and mitigation
      * **Alternatives Considered**: Other approaches and why they were rejected (especially if simpler)
+     * **Approval Status**: Include Status (DRAFT/PENDING/APPROVED), Approved By, and Approval Date fields
 
 7. **Final Confirmation**:
    - Present the complete design document location to the user
