@@ -39,7 +39,7 @@ Install it with a single command. The script will automatically add the `sk-init
 ```bash
 curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
-> The script clones the repo to `~/.spec-kit` and creates a symlink for `sk-init` in `/usr/local/bin/` (which may require `sudo` permissions).
+> The script clones the repo to `~/.spec-lite` and creates a symlink for `sk-init` in `/usr/local/bin/` (which may require `sudo` permissions).
 
 ### Usage
 

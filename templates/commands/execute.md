@@ -5,7 +5,7 @@ scripts:
   ps: .specify/scripts/powershell/execute-design.ps1 -Json {ARGS}
 ---
 
-**Objective**: Execute an implementation based on a user-selected, approved design document.
+**Objective**: Execute an implementation based on an approved design document, automatically selecting it if only one exists, or letting the user choose from multiple options.
 
 1.  **Initial Script Execution**:
     - Run the script `{SCRIPT}` from the repo root **without any arguments**.
@@ -13,11 +13,12 @@ scripts:
 
 2.  **User Interaction**:
     - **If the script output indicates "No design documents found"**, inform the user and stop.
-    - **If the script lists available designs**, present the list to the user and ask them to choose which one to execute. You can show the full name or just the ID for simplicity.
-    - Wait for the user to provide the ID or full name of the design they want to execute.
+    - **If the script lists exactly one design**, inform the user and automatically proceed with that design without asking for selection.
+    - **If the script lists multiple designs**, present the list to the user and ask them to choose which one to execute. You can show the full name or just the ID for simplicity.
+    - When user selection is needed, wait for the user to provide the ID or full name of the design they want to execute.
 
 3.  **Final Script Execution**:
-    - Once the user has made a selection, re-run the script `{SCRIPT}`, this time passing the user's selected design ID or name as an argument.
+    - Once a design is selected (either automatically or by the user), re-run the script `{SCRIPT}`, this time passing the selected design ID or name as an argument.
     - Parse the JSON output from this second run for `DESIGN_FILE`, `DESIGN_ID`, and `PROJECT_ROOT`. All file paths must be absolute.
 
 4.  **Pre-execution Validation**:

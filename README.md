@@ -40,7 +40,7 @@
 ```bash
 curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
-> 脚本会将代码克隆到 `~/.spec-kit`，并在 `/usr/local/bin/` 中创建 `sk-init` 符号链接（可能需要 `sudo` 权限）。
+> 脚本会将代码克隆到 `~/.spec-lite`，并在 `/usr/local/bin/` 中创建 `sk-init` 符号链接（可能需要 `sudo` 权限）。
 
 ### 使用
 
