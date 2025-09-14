@@ -72,8 +72,17 @@ Given the user's requirement provided as an argument, do this:
 
 3. **Design Formulation**:
    - Based on the context analysis, formulate a clear design approach.
+   - **Conduct Impact Analysis**:
+     * Identify all files and modules that will be added, modified, or deleted.
+     * Assess the potential ripple effects on other parts of the system (e.g., performance, security, existing functionality).
+     * Honestly evaluate the risks and side effects of the proposed changes, and how they will be mitigated.
    - Make reasonable assumptions based on codebase patterns.
-   - Prepare a concise "Proposed Design" summary (goals, scope, approach, key changes, trade-offs, alternatives, risks). This summary MUST incorporate the findings from the context analysis, especially how the design leverages existing strengths and mitigates obstacles.
+   - Prepare a concise "Proposed Design" summary. This summary MUST transparently include:
+     * **Goal & Scope**: What we are building and why.
+     * **Approach**: How we will build it.
+     * **Key Changes**: A list of primary files/modules to be touched.
+     * **Impact & Risks**: The results of the impact analysis, including potential disruptions to the existing codebase.
+     * **Alternatives**: Other options considered and why they were discarded.
    - Collect all open questions/choices to align in the next step.
 
 4. **Single Alignment Check (MANDATORY)**:
