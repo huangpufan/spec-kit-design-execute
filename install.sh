@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 #
-# Spec-Kit Design & Execute - Installation Script
+# Spec-Lite - Installation Script
 #
-# This script installs the spec-kit-init command for easy project setup.
+# This script installs the sk-init command for easy project setup.
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/main/install.sh | bash
 #
 # Or, to install a specific version:
-#   curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/v1.0.0/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/v1.0.0/install.sh | bash
 #
 
 set -e
 
 
-GITHUB_REPO="huangpufan/spec-kit-design-execute"
-INSTALL_DIR="$HOME/.spec-kit-design-execute"
+GITHUB_REPO="huangpufan/spec-lite"
+INSTALL_DIR="$HOME/.spec-lite"
 CMD_NAME="sk-init"
 SYMLINK_PATH="/usr/local/bin/$CMD_NAME"
 
@@ -25,7 +25,7 @@ command_exists() {
 }
 
 # --- Main Installation Logic ---
-echo "Installing Spec-Kit Design & Execute..."
+echo "Installing Spec-Lite..."
 
 # 1. Check for git
 if ! command_exists git; then
@@ -71,7 +71,7 @@ fi
 
 # 4. Final instructions
 echo ""
-echo "✅ Spec-Kit Design & Execute installed successfully!"
+echo "✅ Spec-Lite installed successfully!"
 echo ""
 echo "You can now run 'sk-init' in any git repository to set up the commands."
 echo "Example:"

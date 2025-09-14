@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Spec-Kit Design & Execute - Uninstallation Script
+# Spec-Lite - Uninstallation Script
 #
 # This script removes the sk-init command and the cloned repository.
 #
@@ -8,7 +8,7 @@
 set -e
 
 # --- Configuration ---
-INSTALL_DIR="$HOME/.spec-kit-design-execute"
+INSTALL_DIR="$HOME/.spec-lite"
 CMD_NAME="sk-init"
 SYMLINK_PATH="/usr/local/bin/$CMD_NAME"
 
@@ -18,7 +18,7 @@ command_exists() {
 }
 
 # --- Main Uninstallation Logic ---
-echo "Uninstalling Spec-Kit Design & Execute..."
+echo "Uninstalling Spec-Lite..."
 
 # 1. Remove symlink
 if [ -L "$SYMLINK_PATH" ]; then
@@ -47,5 +47,5 @@ if [ -d "$INSTALL_DIR" ]; then
 fi
 
 echo ""
-echo "✅ Spec-Kit Design & Execute has been uninstalled."
+echo "✅ Spec-Lite has been uninstalled."
 echo ""

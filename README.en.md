@@ -1,4 +1,4 @@
-# Spec-Kit Design & Execute
+# Spec-Lite
 
 **A lightweight AI-assisted development workflow, optimized for Cursor.**
 
@@ -22,7 +22,7 @@ While using [Spec-Kit](https://github.com/github/spec-kit), I found myself in a 
 
 ### Our Solution
 
-**Spec-Kit Design & Execute** focuses on solving the "light enough" problem:
+**Spec-Lite** focuses on solving the "light enough" problem:
 
 -   ✅ **Minimalist Flow**: Keeps only the core two steps: Design → Execute.
 -   ✅ **Out-of-the-Box**: A single command to initialize and get started immediately.
@@ -58,7 +58,7 @@ This tool helps you:
 
 ## 📊 Comparison with Spec-Kit
 
-| Feature                | Spec-Kit                                | Spec-Kit Design & Execute          |
+| Feature                | Spec-Kit                                | Spec-Lite          |
 | ---------------------- | --------------------------------------- | ---------------------------------- |
 | **Workflow Steps**     | 4 steps (specify→plan→tasks→implement)  | 2 steps (design→execute)           |
 | **Initialization Time**| Requires configuring multiple tools     | One command, 30 seconds to complete|
@@ -90,7 +90,7 @@ This tool helps you:
 You can install this tool with a single command. The script will automatically install the `sk-init` command into your system.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
 
 The installation script will perform the following actions:
@@ -217,7 +217,7 @@ We firmly believe in:
 If you want to update to the latest version, simply re-run the installation command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
 
 ## Uninstalling
@@ -225,7 +225,7 @@ curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/m
 If you want to uninstall this tool, you can run the following command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/uninstall.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash
 ```
 
 ## 🚧 Roadmap

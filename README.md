@@ -1,4 +1,4 @@
-# Spec-Kit Design & Execute
+# Spec-Lite
 
 [English](./README.en.md)
 
@@ -22,7 +22,7 @@
 
 ### 我们的解决方案
 
-**Spec-Kit Design & Execute** 专注于解决"足够轻"的问题：
+**Spec-Lite** 专注于解决"足够轻"的问题：
 
 - ✅ **极简流程**：只保留最核心的 Design → Execute 两步
 - ✅ **开箱即用**：一行命令完成初始化，立即开始使用
@@ -58,7 +58,7 @@
 
 ## 📊 与 Spec-Kit 的对比
 
-| 特性 | Spec-Kit | Spec-Kit Design & Execute |
+| 特性 | Spec-Kit | Spec-Lite |
 |------|----------|---------------------------|
 | **流程步骤** | 4步（specify → plan → tasks → implement） | 2步（design → execute） |
 | **初始化时间** | 需要配置多个工具和环境 | 一行命令，30秒完成 |
@@ -90,7 +90,7 @@
 你可以通过一行命令来安装本工具。脚本会自动将 `sk-init` 命令安装到你的系统中。
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
 
 安装脚本会做以下几件事:
@@ -217,7 +217,7 @@ sk-init
 如果你想更新到最新版本，只需重新运行安装命令即可：
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 ```
 
 ## 卸载
@@ -225,7 +225,7 @@ curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/m
 如果你想卸载本工具，可以运行以下命令：
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/huangpufan/spec-kit-design-execute/master/uninstall.sh | bash
+curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/uninstall.sh | bash
 ```
 
 ## 🚧 路线图
