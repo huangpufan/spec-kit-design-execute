@@ -40,7 +40,7 @@ For Chinese: "这是设计阶段。我不能在这里实现代码。让我们先
 
 ---
 
-**INTERACTION PRINCIPLE**: Be efficient and focused. Only pause when you genuinely need clarification or when the user must make a choice between alternatives. Do NOT ask if the user is ready or make unnecessary confirmations.
+**INTERACTION PRINCIPLE**: Be efficient and focused. Require exactly one alignment check after investigation to confirm key design decisions. Outside of that, only pause when you genuinely need clarification or when the user must make a choice. Do NOT ask if the user is ready or make unnecessary confirmations.
 
 **OPENING STATEMENT:**
 First check the language configuration, then use the appropriate opening:
@@ -76,9 +76,17 @@ Given the user's requirement provided as an argument, do this:
      * Map dependencies and integration points
    - Formulate a clear design approach based on analysis
    - Make reasonable assumptions based on codebase patterns
-   - **ONLY ASK QUESTIONS IF**: You encounter critical ambiguities that block design creation. Present all questions at once, not piecemeal.
+   - Prepare a concise "Proposed Design" summary (goals, scope, approach, key changes, trade-offs, alternatives, risks) and collect all open questions/choices to align in the next step.
 
-4. **Design Documentation**:
+4. **Single Alignment Check (MANDATORY)**:
+   - Present the "Proposed Design" summary and all critical decisions/choices to the user in one message
+   - Ask for explicit confirmation or selections (e.g., choose between options, approve/reject)
+   - On approval, proceed to create the design document
+   - If adjustments are requested, integrate them and present a short final confirmation (at most one iteration)
+   
+   **⏸️ STOP HERE - Wait for the user's decision before creating the design document.**
+
+5. **Design Documentation**:
    
    **🚫 NO CODE IN DESIGN DOCUMENT! Only architectural decisions, data flow, and high-level approach.**
    
@@ -109,16 +117,16 @@ Given the user's requirement provided as an argument, do this:
      * **Alternatives Considered**: Other approaches and why they were rejected (especially if simpler)
      * **Approval Status**: Include Status (DRAFT/PENDING/APPROVED), Approved By, and Approval Date fields
 
-5. **Design Delivery**:
+6. **Design Delivery**:
    - Create the design document and inform user of its location
    - State: "Design document created at [location]. You can review it and request adjustments if needed, or use `/execute` when ready to implement."
    - Make any requested adjustments promptly
 
 ## 🚨 KEY RULES:
 
-1. **BE EFFICIENT** - Complete the entire analysis and design creation in minimal interactions. Don't ask unnecessary questions.
+1. **BE EFFICIENT** - Complete the analysis and design with minimal interactions.
 
-2. **ONLY STOP FOR REAL ISSUES** - Only pause if you encounter critical ambiguities that genuinely block design creation.
+2. **ONE MANDATORY ALIGNMENT CHECK** - After investigation and before writing the design doc, present a consolidated "Proposed Design" and wait for the user's decision once. Outside of this checkpoint, only pause for real issues.
 
 3. **NO FAKE INTERACTIONS** - Never write "The user says..." or assume responses. All user input must be real.
 
