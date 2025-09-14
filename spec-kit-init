@@ -41,25 +41,19 @@ if [ -f "$LANG_CONFIG" ]; then
     else
         # 重新选择语言
         echo ""
-        log_info "Please select document language:"
-        PS3="Please enter your choice: "
-        options=("中文 (Chinese)" "English")
-        select opt in "${options[@]}"
-        do
-            case $opt in
-                "中文 (Chinese)")
-                    LANGUAGE="zh"
-                    log_success "Language set to Chinese."
-                    break
-                    ;;
-                "English")
-                    LANGUAGE="en"
-                    log_success "Language set to English."
-                    break
-                    ;;
-                *) log_warning "Invalid option, please try again.";;
-            esac
-        done
+        current_lang_display=$([ "$LANGUAGE" = "zh" ] && echo "中文 (Chinese)" || echo "English")
+        other_lang_display=$([ "$LANGUAGE" = "zh" ] && echo "English" || echo "中文 (Chinese)")
+        other_lang_code=$([ "$LANGUAGE" = "zh" ] && echo "en" || echo "zh")
+
+        log_info "Current language is ${current_lang_display}."
+        echo -n "Press Enter to keep, or type '${other_lang_code}' to switch to ${other_lang_display}: "
+        read -r new_lang
+        if [[ "$new_lang" == "$other_lang_code" ]]; then
+            LANGUAGE="$other_lang_code"
+            log_success "Language set to ${other_lang_display}."
+        else
+            log_info "Keeping current language: ${current_lang_display}."
+        fi
     fi
 else
     # 没有配置文件，进行首次选择
