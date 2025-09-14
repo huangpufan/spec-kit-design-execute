@@ -5,10 +5,10 @@
 # This script installs the sk-init command for easy project setup.
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash
 #
 # To install from a specific branch (e.g., dev):
-#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/main/install.sh | bash -s dev
+#   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/master/install.sh | bash -s dev
 #
 # Or, to install a specific version:
 #   curl -sSL https://raw.githubusercontent.com/huangpufan/spec-lite/v1.0.0/install.sh | bash
@@ -16,7 +16,7 @@
 
 set -e
 
-BRANCH="${1:-main}" # Default to 'main' if no branch is provided
+BRANCH="${1:-master}" # Default to 'master' if no branch is provided
 
 GITHUB_REPO="huangpufan/spec-lite"
 INSTALL_DIR="$HOME/.spec-lite"
