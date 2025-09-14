@@ -13,7 +13,7 @@ We've found that for daily development, a full-fledged Spec-Driven Development p
 1.  **Design Clearly**: Structure your ideas into a clear design document through an interactive dialogue with AI.
 2.  **Execute Precisely**: Let the AI implement the code with high quality, based on the finalized design document.
 
-Our philosophy is: **Good Design Document + AI Execution = High-Quality Code**.
+Our philosophy is: **Thorough Project Understanding + Precise Human-AI Alignment = High-Quality Code**.
 
 ## 🚀 Use Cases
 
