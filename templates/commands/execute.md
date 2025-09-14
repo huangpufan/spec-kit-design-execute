@@ -5,6 +5,13 @@ scripts:
   ps: .specify/scripts/powershell/execute-design.ps1 -Json {ARGS}
 ---
 
+# 🌐 LANGUAGE CONFIGURATION
+
+**IMPORTANT**: Check the language configuration at `.specify/config/language.conf`:
+- If `LANGUAGE=zh`: Use Chinese (中文) for all dialogues and messages
+- If `LANGUAGE=en`: Use English for all dialogues and messages
+- If the config file doesn't exist: Default to English
+
 **Objective**: Execute an implementation based on an approved design document, automatically selecting it if only one exists, or letting the user choose from multiple options.
 
 1.  **Initial Script Execution**:
